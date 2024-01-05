@@ -3,6 +3,7 @@ package il.ijse.gdse66.simple_json_project;
 
 import jakarta.json.Json;
 import jakarta.json.JsonObject;
+import jakarta.json.JsonObjectBuilder;
 import jakarta.json.JsonReader;
 import jakarta.servlet.ServletConfig;
 import jakarta.servlet.ServletException;
@@ -55,6 +56,29 @@ public class JsonProcessServlet extends HttpServlet {
         JsonReader reader = Json.createReader(req.getReader());
         JsonObject jsonObject = reader.readObject();
         System.out.println(jsonObject);
+
+
+
+//----------------------------------------------json write ------------------------------------------------
+
+//        using Json -P (Processing) library
+        //method 1
+        JsonObjectBuilder builder = Json.createObjectBuilder();
+        builder.add("id", "c008");
+        builder.add("name", "kamal");
+        builder.add("address", "colombo");
+        JsonObject build = builder.build();
+        resp.getWriter().write(build.toString());
+
+        //method 2
+
+        JsonObject build1 = Json.createObjectBuilder()
+                .add("id", "c008")
+                .add("name", "kamal")
+                .add("address", "colombo")
+                .build();
+
+        resp.getWriter().write(build1.toString());
 
     }
 }
