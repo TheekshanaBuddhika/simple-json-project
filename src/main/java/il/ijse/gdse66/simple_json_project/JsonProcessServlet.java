@@ -1,6 +1,9 @@
 package il.ijse.gdse66.simple_json_project;
 
 
+import jakarta.json.Json;
+import jakarta.json.JsonObject;
+import jakarta.json.JsonReader;
 import jakarta.servlet.ServletConfig;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.ServletInputStream;
@@ -49,6 +52,9 @@ public class JsonProcessServlet extends HttpServlet {
 
 
 //        with libraries
+        JsonReader reader = Json.createReader(req.getReader());
+        JsonObject jsonObject = reader.readObject();
+        System.out.println(jsonObject);
 
     }
 }
