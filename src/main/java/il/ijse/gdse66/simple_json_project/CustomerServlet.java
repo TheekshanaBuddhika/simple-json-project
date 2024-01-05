@@ -33,37 +33,7 @@ public class CustomerServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Connection connection = null;
 
-        /*catch request parameter as a String*/
-        String id = req.getParameter("id");
-        String name = req.getParameter("name");
-        String address = req.getParameter("address");
-
-        System.out.printf("id=%s, name=%s, address=%s\n", id,name,address);
-
-        /*create a database connection and save data in database*/
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            connection = DriverManager.getConnection(url,username,password);
-            PreparedStatement stm = connection.prepareStatement("INSERT INTO customer(id, name, address) VALUES (?,?,?)");
-
-            stm.setString(1,id);
-            stm.setString(2, name);
-            stm.setString(3, address);
-
-            stm.executeUpdate();
-        } catch (ClassNotFoundException | SQLException e) {
-            throw new RuntimeException(e);
-        }finally {
-            if(connection !=null) {
-                try {
-                    connection.close();
-                } catch (SQLException e) {
-                    throw new RuntimeException(e);
-                }
-            }
-        }
     }
 
 
@@ -71,37 +41,7 @@ public class CustomerServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        PrintWriter writer = resp.getWriter();
-        Connection connection = null;
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            connection = DriverManager.getConnection(url,username,password);
-            Statement stm = connection.createStatement();
-            ResultSet rs = stm.executeQuery("select * from customer");
-            String JsonArray = "";
-            while (rs.next()) {
-                String id = rs.getString("id");
-                String name = rs.getString("name");
-                String address = rs.getString("address");
-                System.out.println(id + " " + name + " " + address);
-                String jsonobj = "{\"id\": \""+id +"\","+"\"name\":\""+name+"\","+"\"address\":\""+address + "\"}";
-                JsonArray += jsonobj + ",";
-            }
-            JsonArray = "["+JsonArray.substring(0,JsonArray.length()-1)+"]";
-            System.out.println(JsonArray);
-            writer.write(JsonArray);
-            resp.setContentType("application/json");
-        } catch (ClassNotFoundException | SQLException e) {
-            throw new RuntimeException(e);
-        }finally {
-            if(connection !=null) {
-                try {
-                    connection.close();
-                } catch (SQLException e) {
-                    throw new RuntimeException(e);
-                }
-            }
-        }
+
     }
 
 }
