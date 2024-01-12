@@ -1,10 +1,7 @@
 package il.ijse.gdse66.simple_json_project;
 
 
-import jakarta.json.Json;
-import jakarta.json.JsonObject;
-import jakarta.json.JsonObjectBuilder;
-import jakarta.json.JsonReader;
+import jakarta.json.*;
 import jakarta.servlet.ServletConfig;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.ServletInputStream;
@@ -57,6 +54,20 @@ public class JsonProcessServlet extends HttpServlet {
         JsonObject jsonObject = reader.readObject();
         System.out.println(jsonObject);
 
+        String id = jsonObject.getString("id");
+        String name = jsonObject.getString("name");
+        JsonObject address = jsonObject.getJsonObject("address");
+
+        int no = address.getInt("no");
+        String street = address.getString("street");
+        String city = address.getString("city");
+
+        JsonArray contacts = jsonObject.getJsonArray("contacts");
+
+        String string = contacts.getString(0);
+        String string1 = contacts.getString(1);
+
+        System.out.println(id + "\n" + name + "\n" + no + "\n" + street + "\n" + city + "\n" + string + "\n" + string1);
 
 
 //----------------------------------------------json write ------------------------------------------------
