@@ -53,9 +53,10 @@ public class JsonBindServlet extends HttpServlet {
       //  customer customer = jsb.fromJson(req.getReader(), customer.class);
       //  System.out.println(customer.toString());
 
-        ArrayList arrayList = jsb.fromJson(req.getReader(),ArrayList.class);
-        System.out.println(arrayList.toString());
+      //  ArrayList arrayList = jsb.fromJson(req.getReader(),ArrayList.class);
+      //  System.out.println(arrayList.toString());
 
-
+        Object o = jsb.fromJson(req.getReader(), new ArrayList<customer>() {}.getClass().getGenericSuperclass());
+        System.out.println(o);
     }
 }
