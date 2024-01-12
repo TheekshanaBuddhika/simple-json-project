@@ -52,7 +52,7 @@ public class JsonProcessServlet extends HttpServlet {
 
 
 
-//        with libraries
+//        with json-p libraries
         JsonReader reader = Json.createReader(req.getReader());
         JsonObject jsonObject = reader.readObject();
         System.out.println(jsonObject);
