@@ -99,7 +99,8 @@ public class JsonProcessServlet extends HttpServlet {
         JsonObject build1 = Json.createObjectBuilder()
                 .add("id", "c008")
                 .add("name", "kamal")
-                .add("address", "colombo")
+                .add("address", Json.createObjectBuilder().add("no", 1).add("street","street").add("city","galle"))
+                .add("contacts",Json.createArrayBuilder().add("0123456789").add("5555555555"))
                 .build();
 
         resp.getWriter().write(build1.toString());
