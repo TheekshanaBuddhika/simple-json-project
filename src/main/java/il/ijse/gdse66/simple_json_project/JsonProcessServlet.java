@@ -47,7 +47,7 @@ public class JsonProcessServlet extends HttpServlet {
         }
         System.out.println(json);*/
 
-
+/*
 
 //        with json-p libraries
         JsonReader reader = Json.createReader(req.getReader());
@@ -69,7 +69,7 @@ public class JsonProcessServlet extends HttpServlet {
 
         System.out.println(id + "\n" + name + "\n" + no + "\n" + street + "\n" + city + "\n" + string + "\n" + string1);
 
-
+*/
 //----------------------------------------------json write ------------------------------------------------
 
 //        using Json -P (Processing) library
@@ -77,7 +77,20 @@ public class JsonProcessServlet extends HttpServlet {
         JsonObjectBuilder builder = Json.createObjectBuilder();
         builder.add("id", "c008");
         builder.add("name", "kamal");
-        builder.add("address", "colombo");
+
+        JsonObjectBuilder address = Json.createObjectBuilder();
+        address.add("no", 1);
+        address.add("street","street");
+        address.add("city","galle");
+
+        builder.add("address",address);
+
+        JsonArrayBuilder arrayBuilder = Json.createArrayBuilder();
+        arrayBuilder.add("0123456789");
+        arrayBuilder.add("5555555555");
+
+        builder.add("contacts",arrayBuilder);
+
         JsonObject build = builder.build();
         resp.getWriter().write(build.toString());
 
